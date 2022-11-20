@@ -20,25 +20,73 @@ function playRound(playerSelection, computerSelection) {
     console.log(`You chose ${playerSelection}. Computer chose ${computerSelection}.`);
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
+    let result = 0;
     if (playerSelection == computerSelection){
-        return "It's a tie!";
+        //console.log("It's a tie!")
+        result = 0;
     }
     else if (playerSelection == "rock" && computerSelection == "paper"){
-        return "You lose!";
+        //console.log("You lose!");
+        result = 2;
     }
     else if (playerSelection == "paper" && computerSelection == "scissors"){
-        return "You lose!";
+        //console.log("You lose!");
+        result = 2;
     }
     else if (playerSelection == "scissors" && computerSelection == "rock"){
-        return "You lose!";
+        //console.log("You lose!");
+        result = 2;
     }
     else if (playerSelection == "rock" && computerSelection == "scissors"){
-        return "You win!";
+        //console.log("You win!");
+        result = 1;
     }
     else if (playerSelection == "scissors" && computerSelection == "paper"){
-        return "You win!";
+        //console.log("You win!");
+        result = 1;
     }
     else if (playerSelection == "paper" && computerSelection == "rock"){
-        return "You win!";
+        //console.log("You win!");
+        result = 1;
+    }
+    if (result == 1){
+        console.log("You win!");
+    }
+    else if (result == 2){
+        console.log("You lose!");
+    }
+    else {
+        console.log("It's a draw!");
+    }
+    return result;
+  }
+
+  const getPlayerChoice = () =>{
+    
+  }
+
+  const game = () => {
+    let playerScore = 0;
+    let computerScore = 0;
+    let result = 0;
+    for (let i=0, i<5, i++)
+    {
+        result = playRound(getPlayerChoice(), getComputerChoice());
+        if (result === 1){
+            playerScore++;
+        }
+        else if (result === 2){
+            computerScore++;
+        }
+    }
+    console.log(`You won ${playerScore} rounds. The computer won ${computerScore} rounds.`);
+    if (playerScore>computerScore){
+        console.log('You win!');
+    }
+    else if (computerScore>playerScore){
+        console.log('You lose!');
+    }
+    else {
+        console.log("It's a draw");
     }
   }
