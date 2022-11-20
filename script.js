@@ -3,13 +3,13 @@ const getComputerChoice = () => {
     let computerChoice;
     switch(choice){
         case 0:
-          computerChoice = "Rock";
+          computerChoice = "rock";
           break;
         case 1: 
-          computerChoice = "Paper";
+          computerChoice = "paper";
           break;
         case 2:
-          computerChoice = "Scissors";
+          computerChoice = "scissors";
           break;
           
     }
@@ -17,7 +17,7 @@ const getComputerChoice = () => {
 }
 
 function playRound(playerSelection, computerSelection) {
-    console.log(`You chose ${playerSelection}. Computer chose ${computerSelection}.`);
+    let matchReport = `You chose ${playerSelection}. Computer chose ${computerSelection}.`;
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
     let result = 0;
@@ -49,27 +49,43 @@ function playRound(playerSelection, computerSelection) {
         //console.log("You win!");
         result = 1;
     }
+    let resultString = "";
     if (result == 1){
-        console.log("You win!");
+        resultString = "You win!";
     }
     else if (result == 2){
-        console.log("You lose!");
+        resultString = "You lose!";
     }
     else {
-        console.log("It's a draw!");
+        resultString = "It's a draw!";
     }
+    alert(matchReport + " " + resultString);
+    console.log(matchReport + " " + resultString);
     return result;
   }
 
   const getPlayerChoice = () =>{
-    
-  }
+    let done = false;
+    let choice = "";
+    while (!done)
+    {
+      choice = prompt("Rock, paper or scissors?");
+      choice = choice.toLowerCase();
+      if (choice == "rock" || choice == "paper" || choice == "scissors"){
+          done = true;
+      }
+      else { 
+        alert("Invalid choice");
+      }
+    }
+    return choice;
+  }     
 
   const game = () => {
     let playerScore = 0;
     let computerScore = 0;
     let result = 0;
-    for (let i=0, i<5, i++)
+    for (let i=0; i<5; i++)
     {
         result = playRound(getPlayerChoice(), getComputerChoice());
         if (result === 1){
