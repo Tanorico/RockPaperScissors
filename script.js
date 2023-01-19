@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+let gameOver = false;
+
 const getComputerChoice = () => {
     let choice = Math.floor(Math.random()*3);
     let computerChoice;
@@ -16,7 +20,18 @@ const getComputerChoice = () => {
     return computerChoice;
 }
 
-function playRound(playerSelection, computerSelection) {
+
+function playRound(playerSelection) {
+    if (gameOver){
+        computerScore = 0;
+        playerScore = 0;
+        const winner = document.querySelector('.winner');
+        winner.textContent = "";
+        gameOver = false;
+        
+    }
+    let computerSelection = getComputerChoice();
+    const banner = document.querySelector('.console');
     let matchReport = `You chose ${playerSelection}. Computer chose ${computerSelection}.`;
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
@@ -59,50 +74,30 @@ function playRound(playerSelection, computerSelection) {
     else {
         resultString = "It's a draw!";
     }
-    alert(matchReport + " " + resultString);
+    banner.textContent = (matchReport + " " + resultString);
     console.log(matchReport + " " + resultString);
-    return result;
-  }
+    game(result);
+  }   
 
-  const getPlayerChoice = () =>{
-    let done = false;
-    let choice = "";
-    while (!done)
-    {
-      choice = prompt("Rock, paper or scissors?");
-      choice = choice.toLowerCase();
-      if (choice == "rock" || choice == "paper" || choice == "scissors"){
-          done = true;
-      }
-      else { 
-        alert("Invalid choice");
-      }
+  const game = (result) => {
+    if (result == 1){
+        playerScore++;
     }
-    return choice;
-  }     
-
-  const game = () => {
-    let playerScore = 0;
-    let computerScore = 0;
-    let result = 0;
-    for (let i=0; i<5; i++)
-    {
-        result = playRound(getPlayerChoice(), getComputerChoice());
-        if (result === 1){
-            playerScore++;
-        }
-        else if (result === 2){
-            computerScore++;
-        }
+    else if (result == 2){
+        computerScore++;
     }
-    console.log(`You won ${playerScore} rounds. The computer won ${computerScore} rounds.`);
-    if (playerScore>computerScore){
-        console.log('You win!');
+    const yourScore = document.querySelector('.yourScore');
+    yourScore.textContent = playerScore;
+    const computerScores = document.querySelector('.computerScores');
+    computerScores.textContent = computerScore;
+    const winner = document.querySelector('.winner');
+    if (playerScore === 5){
+        winner.textContent = "You win!";
+        gameOver = true;
     }
-    else if (computerScore>playerScore){
-        console.log('You lose!');
+    else if (computerScore === 5){
+        winner.textContent = "Computer wins!";
+        gameOver = true;
     }
-    else {
-        console.log("It's a draw");
-    }
+    
   }
